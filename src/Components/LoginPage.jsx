@@ -42,6 +42,8 @@ function LoginPage() {
                 id="username"
                 {...register("username", {
                   required: true,
+                  pattern:
+                    /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
                 })}
                 className="form-control"
                 placeholder="Enter username"
@@ -53,8 +55,19 @@ function LoginPage() {
                     : "gray",
                 }}
               />
-              {errors.username && required("Username")}
-              {!errors.username && errors.hidden}
+              {errors.username?.type === "required" && required("Username")}
+              {errors.username?.type === "pattern" && (
+                <div className="alert alert-danger text-danger mt-2">
+                  Username should validate the pattern
+                  <ul>
+                    <li>8-20 characters long</li>
+                    <li>contains characters and numbers</li>
+                    <li>no _ or . at the beginning</li>
+                    <li>no __ or _. or ._ or .. inside</li>
+                    <li>no _ or . at the end</li>
+                  </ul>
+                </div>
+              )}
             </div>
             <div className="mb-3">
               <label htmlFor="email">Email address</label>
@@ -85,7 +98,11 @@ function LoginPage() {
               <label htmlFor="password">Password</label>
               <input
                 id="password"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: true,
+                  pattern:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                })}
                 className="form-control"
                 placeholder="Enter password"
                 type="password"
@@ -97,7 +114,21 @@ function LoginPage() {
                     : "gray",
                 }}
               />
-              {errors.password && required("Password")}
+              {errors.password?.type === "required" && required("Password")}
+              {errors.password?.type === "pattern" && (
+                <div className="alert alert-danger text-danger mt-2">
+                  <h6 className="text-danger">
+                    Password should contain at least:
+                  </h6>
+                  <ul>
+                    <li>Eight characters</li>
+                    <li>One uppercase letter</li>
+                    <li>One lowercase letter</li>
+                    <li>One number</li>
+                    <li>One special character</li>
+                  </ul>
+                </div>
+              )}
             </div>
             <div className="mb-3">
               <div className="custom-control custom-checkbox">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Slider from "./Slider/Slider";
 import { postApi } from "../APIs/postsAPI";
-import { Container, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function HomePage() {
