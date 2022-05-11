@@ -21,7 +21,7 @@ function HomePage() {
   return (
     <>
       <Slider />
-      <div className="bg-gradient-blue p-3 mt-5 mb-2 text-center">
+      <div className="p-3 mt-5 mb-2 text-center bg-primary">
         <h1 className="text-light">Here are the posts in our system</h1>
       </div>
       <div className="d-flex justify-content-center  flex-wrap">
